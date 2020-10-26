@@ -1,4 +1,4 @@
-use std::fs::OpenOptions;
+use std::fs::{OpenOptions, File};
 use std::io::prelude::*;
 use chrono::Utc;
 use std::{io, thread};
@@ -10,20 +10,14 @@ fn main() {
     println!("Starting");
 
     let path = "/tmp/testfile.tst";
-    let mut file = OpenOptions::new()
-        .write(true)
-        .append(true)
-        .create(true)
-        .open(path)
-        .unwrap();
-    //
-    // for _ in 0..5 {
-    //     let time = Utc::now();
-    //     if let Err(e) = writeln!(file, "{}", time) {
-    //         eprintln!("Couldn't write to file: {}", e);
-    //     }
-    //     thread::sleep(Duration::from_secs(1));
-    // }
+    // let mut file = OpenOptions::new()
+    //     .write(true)
+    //     .append(true)
+    //     .create(true)
+    //     .open(path)
+    //     .unwrap();
+
+    let file = File::create(path).unwrap();
 
     println!("Trying to get lock - {}", Utc::now());
 
